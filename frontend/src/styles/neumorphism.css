@@ -223,6 +223,29 @@ a {
   gap: 12px;
 }
 
+.topbar-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 180px;
+}
+
+.topbar-user p {
+  margin: 0;
+  color: var(--neo-text);
+  font-size: 0.9rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.topbar-user span {
+  display: block;
+  margin-top: 3px;
+  color: var(--neo-muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
 .topbar-icon,
 .user-avatar {
   display: grid;
@@ -286,6 +309,12 @@ a {
 .neo-button:hover {
   color: var(--neo-primary);
   transform: translateY(-1px);
+}
+
+.neo-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.72;
+  transform: none;
 }
 
 .neo-button:active {
@@ -393,6 +422,45 @@ a {
   display: grid;
   gap: 14px;
   margin-top: 8px;
+}
+
+.form-error {
+  margin: 0;
+  border-radius: 16px;
+  color: #b91c1c;
+  background: rgba(239, 68, 68, 0.12);
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 12px 14px;
+}
+
+.demo-card {
+  margin-top: 22px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.32);
+  box-shadow: var(--neo-shadow-inset);
+  padding: 16px;
+}
+
+.demo-card h3 {
+  margin: 0 0 10px;
+  color: var(--neo-text);
+  font-size: 0.95rem;
+}
+
+.demo-card p {
+  margin: 6px 0 0;
+  color: var(--neo-muted);
+  font-size: 0.86rem;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.auth-loading {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  padding: 24px;
 }
 
 .info-list {
@@ -604,6 +672,15 @@ a {
   .topbar {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .topbar-actions {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .topbar-user {
+    min-width: 0;
   }
 
   .summary-grid,

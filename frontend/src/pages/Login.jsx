@@ -1,9 +1,43 @@
 import { ArrowRight, BarChart3, ShieldCheck, Warehouse } from "lucide-react"
+import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import NeumorphicButton from "../components/ui/NeumorphicButton"
 import NeumorphicCard from "../components/ui/NeumorphicCard"
 import NeumorphicInput from "../components/ui/NeumorphicInput"
+import { useAuth } from "../context/AuthContext"
+
+const demoAccounts = [
+  "superadmin@inventory.test / password",
+  "admingudang@inventory.test / password",
+  "managergudang@inventory.test / password",
+]
 
 function Login() {
+  const navigate = useNavigate()
+  const { login } = useAuth()
+  const [email, setEmail] = useState("superadmin@inventory.test")
+  const [password, setPassword] = useState("password")
+  const [error, setError] = useState("")
+  const [submitting, setSubmitting] = useState(false)
+
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+    setError("")
+    setSubmitting(true)
+
+    try {
+      await login(email, password)
+      navigate("/dashboard", { replace: true })
+    } catch (loginError) {
+      setError(
+        loginError.response?.data?.message ||
+          "Login gagal. Periksa koneksi API dan kredensial.",
+      )
+    } finally {
+      setSubmitting(false)
+    }
+  }
+
   return (
     <main className="login-page">
       <div className="login-grid">
@@ -15,22 +49,33 @@ function Login() {
               EOQ & ROP Based Inventory Management
             </p>
 
-            <form className="login-form">
+            <form className="login-form" onSubmit={handleSubmit}>
               <NeumorphicInput
                 id="email"
                 label="Email"
                 placeholder="admin@example.com"
                 type="email"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                required
               />
               <NeumorphicInput
                 id="password"
                 label="Password"
                 placeholder="Masukkan password"
                 type="password"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                required
               />
+              {error ? <p className="form-error">{error}</p> : null}
               <div className="login-actions">
-                <NeumorphicButton type="button" variant="primary">
-                  Masuk
+                <NeumorphicButton
+                  type="submit"
+                  variant="primary"
+                  disabled={submitting}
+                >
+                  {submitting ? "Memproses..." : "Masuk"}
                   <ArrowRight size={18} />
                 </NeumorphicButton>
               </div>
@@ -45,6 +90,13 @@ function Login() {
             Fondasi UI ini disiapkan untuk pemantauan stok, rekomendasi
             pemesanan, dan analisis persediaan berbasis EOQ serta ROP.
           </p>
+
+          <div className="demo-card">
+            <h3>Akun Demo</h3>
+            {demoAccounts.map((account) => (
+              <p key={account}>{account}</p>
+            ))}
+          </div>
 
           <div className="info-list">
             <div className="info-item">
