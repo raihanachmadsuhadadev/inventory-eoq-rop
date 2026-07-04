@@ -5,7 +5,9 @@ import Categories from "./pages/Categories"
 import Dashboard from "./pages/Dashboard"
 import Hubs from "./pages/Hubs"
 import Login from "./pages/Login"
+import Products from "./pages/Products"
 import Shifts from "./pages/Shifts"
+import Suppliers from "./pages/Suppliers"
 
 function App() {
   const { isAuthenticated, loading } = useAuth()
@@ -56,6 +58,22 @@ function App() {
         element={
           <ProtectedRoute>
             <Shifts />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/suppliers"
+        element={
+          <ProtectedRoute>
+            <Suppliers />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/products"
+        element={
+          <ProtectedRoute>
+            <Products />
           </ProtectedRoute>
         }
       />

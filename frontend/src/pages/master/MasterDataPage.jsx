@@ -16,9 +16,17 @@ const emptyForm = (fields) =>
     {},
   )
 
-function MasterDataPage({ title, subtitle, endpoint, fields, columns }) {
+function MasterDataPage({
+  title,
+  subtitle,
+  endpoint,
+  fields,
+  columns,
+  manageRoles = ["super_admin"],
+})
+{
   const { user } = useAuth()
-  const canManage = user?.role?.slug === "super_admin"
+  const canManage = manageRoles.includes(user?.role?.slug)
   const [items, setItems] = useState([])
   const [form, setForm] = useState(() => emptyForm(fields))
   const [editingItem, setEditingItem] = useState(null)
@@ -36,11 +44,13 @@ function MasterDataPage({ title, subtitle, endpoint, fields, columns }) {
     }
 
     return items.filter((item) =>
-      columns.some((column) =>
-        String(item[column.key] || "")
+      columns.some((column) => {
+        const value = column.render ? column.render(item) : item[column.key]
+
+        return String(value || "")
           .toLowerCase()
-          .includes(keyword),
-      ),
+          .includes(keyword)
+      }),
     )
   }, [columns, items, search])
 
@@ -121,7 +131,12 @@ function MasterDataPage({ title, subtitle, endpoint, fields, columns }) {
       const payload = fields.reduce(
         (nextPayload, field) => ({
           ...nextPayload,
-          [field.name]: field.type === "checkbox" ? Boolean(form[field.name]) : form[field.name],
+          [field.name]:
+            field.type === "checkbox"
+              ? Boolean(form[field.name])
+              : form[field.name] === ""
+                ? null
+                : form[field.name],
         }),
         {},
       )
@@ -228,7 +243,11 @@ function MasterDataPage({ title, subtitle, endpoint, fields, columns }) {
                   {filteredItems.map((item) => (
                     <tr key={item.id}>
                       {columns.map((column) => (
-                        <td key={column.key}>{item[column.key] || "-"}</td>
+                        <td key={column.key}>
+                          {column.render
+                            ? column.render(item) || "-"
+                            : item[column.key] || "-"}
+                        </td>
                       ))}
                       <td>
                         <span
@@ -294,6 +313,26 @@ function MasterDataPage({ title, subtitle, endpoint, fields, columns }) {
                     />
                     <span>{field.label}</span>
                   </label>
+                ) : field.type === "select" ? (
+                  <div key={field.name} className="field">
+                    <label htmlFor={field.name}>{field.label}</label>
+                    <select
+                      id={field.name}
+                      className="neo-input"
+                      value={form[field.name]}
+                      onChange={(event) =>
+                        handleChange(field, event.target.value)
+                      }
+                      required={field.required}
+                    >
+                      <option value="">{field.placeholder || "Pilih data"}</option>
+                      {(field.options || []).map((option) => (
+                        <option key={option.value} value={option.value}>
+                          {option.label}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 ) : field.type === "textarea" ? (
                   <div key={field.name} className="field">
                     <label htmlFor={field.name}>{field.label}</label>

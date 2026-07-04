@@ -3,7 +3,9 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\HubController;
+use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ShiftController;
+use App\Http\Controllers\Api\SupplierController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('auth')->group(function (): void {
@@ -23,6 +25,10 @@ Route::middleware('auth:sanctum')->group(function (): void {
         Route::get('/hubs/{hub}', [HubController::class, 'show']);
         Route::get('/shifts', [ShiftController::class, 'index']);
         Route::get('/shifts/{shift}', [ShiftController::class, 'show']);
+        Route::get('/suppliers', [SupplierController::class, 'index']);
+        Route::get('/suppliers/{supplier}', [SupplierController::class, 'show']);
+        Route::get('/products', [ProductController::class, 'index']);
+        Route::get('/products/{product}', [ProductController::class, 'show']);
     });
 
     Route::middleware('role:super_admin')->group(function (): void {
@@ -35,5 +41,14 @@ Route::middleware('auth:sanctum')->group(function (): void {
         Route::post('/shifts', [ShiftController::class, 'store']);
         Route::put('/shifts/{shift}', [ShiftController::class, 'update']);
         Route::delete('/shifts/{shift}', [ShiftController::class, 'destroy']);
+    });
+
+    Route::middleware('role:super_admin,admin_gudang')->group(function (): void {
+        Route::post('/suppliers', [SupplierController::class, 'store']);
+        Route::put('/suppliers/{supplier}', [SupplierController::class, 'update']);
+        Route::delete('/suppliers/{supplier}', [SupplierController::class, 'destroy']);
+        Route::post('/products', [ProductController::class, 'store']);
+        Route::put('/products/{product}', [ProductController::class, 'update']);
+        Route::delete('/products/{product}', [ProductController::class, 'destroy']);
     });
 });
