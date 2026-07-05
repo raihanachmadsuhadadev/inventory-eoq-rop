@@ -29,7 +29,8 @@ const menuItems = [
   { label: "EOQ", to: "/eoq", icon: BarChart3 },
   { label: "ROP", to: "/rop", icon: Gauge },
   { label: "Rekomendasi", to: "/purchase-recommendations", icon: Lightbulb },
-  { label: "Laporan", to: "#", icon: FileText },
+  { label: "Laporan Persediaan", to: "/reports/inventory", icon: FileText },
+  { label: "Laporan EOQ & ROP", to: "/reports/eoq-rop", icon: FileText },
 ]
 
 function Sidebar() {

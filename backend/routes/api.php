@@ -2,11 +2,13 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\EoqCalculationController;
 use App\Http\Controllers\Api\HubController;
 use App\Http\Controllers\Api\InventoryController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\PurchaseRecommendationController;
+use App\Http\Controllers\Api\ReportController;
 use App\Http\Controllers\Api\RopCalculationController;
 use App\Http\Controllers\Api\ShiftController;
 use App\Http\Controllers\Api\StockTransactionController;
@@ -44,6 +46,11 @@ Route::middleware('auth:sanctum')->group(function (): void {
         Route::get('/rop-calculations/{ropCalculation}', [RopCalculationController::class, 'show']);
         Route::get('/purchase-recommendations', [PurchaseRecommendationController::class, 'index']);
         Route::get('/purchase-recommendations/{purchaseRecommendation}', [PurchaseRecommendationController::class, 'show']);
+        Route::get('/dashboard/summary', [DashboardController::class, 'summary']);
+        Route::get('/dashboard/critical-stock', [DashboardController::class, 'criticalStock']);
+        Route::get('/dashboard/reorder-alerts', [DashboardController::class, 'reorderAlerts']);
+        Route::get('/reports/inventory', [ReportController::class, 'inventory']);
+        Route::get('/reports/eoq-rop', [ReportController::class, 'eoqRop']);
     });
 
     Route::middleware('role:super_admin')->group(function (): void {

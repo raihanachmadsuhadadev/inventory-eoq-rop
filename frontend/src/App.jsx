@@ -9,6 +9,8 @@ import Inventories from "./pages/Inventories"
 import Login from "./pages/Login"
 import Products from "./pages/Products"
 import PurchaseRecommendations from "./pages/PurchaseRecommendations"
+import EoqRopReport from "./pages/reports/EoqRopReport"
+import InventoryReport from "./pages/reports/InventoryReport"
 import Rop from "./pages/Rop"
 import Shifts from "./pages/Shifts"
 import StockTransactions from "./pages/StockTransactions"
@@ -119,6 +121,22 @@ function App() {
         element={
           <ProtectedRoute>
             <PurchaseRecommendations />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/reports/inventory"
+        element={
+          <ProtectedRoute>
+            <InventoryReport />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/reports/eoq-rop"
+        element={
+          <ProtectedRoute>
+            <EoqRopReport />
           </ProtectedRoute>
         }
       />

@@ -1,73 +1,68 @@
 import {
   AlertTriangle,
+  Archive,
   ArrowUpRight,
   Building2,
+  Clock,
   Package,
   ShoppingCart,
 } from "lucide-react"
-import AppLayout from "../layouts/AppLayout"
-import NeumorphicCard from "../components/ui/NeumorphicCard"
+import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import NeumorphicButton from "../components/ui/NeumorphicButton"
-import StatusBadge from "../components/ui/StatusBadge"
+import NeumorphicCard from "../components/ui/NeumorphicCard"
+import AppLayout from "../layouts/AppLayout"
+import api from "../lib/api"
 
-const summaries = [
-  { label: "Total Produk", value: "128", icon: Package },
-  { label: "Total Supplier", value: "24", icon: Building2 },
-  { label: "Stok Kritis", value: "9", icon: AlertTriangle },
-  { label: "Perlu Pemesanan", value: "16", icon: ShoppingCart },
+const summaryConfig = [
+  { key: "total_products", label: "Total Produk", icon: Package },
+  { key: "total_suppliers", label: "Total Supplier", icon: Building2 },
+  { key: "total_inventory_stock", label: "Total Stok", icon: Archive },
+  { key: "critical_stock_count", label: "Stok Kritis", icon: AlertTriangle },
+  { key: "reorder_recommendation_count", label: "Perlu Pemesanan", icon: ShoppingCart },
+  { key: "pending_recommendation_count", label: "Rekomendasi Pending", icon: Clock },
 ]
 
-const criticalStocks = [
-  {
-    product: "Kopi Arabica 1kg",
-    category: "Bahan Baku",
-    stock: 12,
-    rop: 20,
-    supplier: "Nusa Agro",
-    status: "Kritis",
-  },
-  {
-    product: "Cup Paper 12oz",
-    category: "Kemasan",
-    stock: 85,
-    rop: 120,
-    supplier: "Prima Pack",
-    status: "Perlu Pesan",
-  },
-  {
-    product: "Gula Cair 5L",
-    category: "Bahan Baku",
-    stock: 34,
-    rop: 30,
-    supplier: "Sari Manis",
-    status: "Aman",
-  },
-  {
-    product: "Susu UHT 1L",
-    category: "Bahan Baku",
-    stock: 18,
-    rop: 25,
-    supplier: "Dairy Fresh",
-    status: "Kritis",
-  },
-]
-
-const recommendations = [
-  {
-    product: "Kopi Arabica 1kg",
-    quantity: "48 unit",
-    note: "Prioritas tinggi karena stok berada di bawah ROP.",
-    meta: ["EOQ 48", "Lead time 5 hari"],
-  },
-  {
-    product: "Cup Paper 12oz",
-    quantity: "220 unit",
-    note: "Pemesanan disarankan minggu ini untuk menjaga buffer stok.",
-    meta: ["EOQ 220", "ROP 120"],
-  },
-]
+function formatNumber(value) {
+  return Number(value || 0).toLocaleString("id-ID")
+}
 
 function Dashboard() {
+  const navigate = useNavigate()
+  const [summary, setSummary] = useState({})
+  const [criticalStocks, setCriticalStocks] = useState([])
+  const [recommendations, setRecommendations] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState("")
+
+  useEffect(() => {
+    const fetchDashboard = async () => {
+      try {
+        setLoading(true)
+        setError("")
+        const [summaryResponse, criticalResponse, reorderResponse] =
+          await Promise.all([
+            api.get("/dashboard/summary"),
+            api.get("/dashboard/critical-stock"),
+            api.get("/dashboard/reorder-alerts"),
+          ])
+
+        setSummary(summaryResponse.data?.data || {})
+        setCriticalStocks(criticalResponse.data?.data || [])
+        setRecommendations(reorderResponse.data?.data || [])
+      } catch (fetchError) {
+        setError(
+          fetchError.response?.data?.message ||
+            "Gagal memuat ringkasan dashboard.",
+        )
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchDashboard()
+  }, [])
+
   return (
     <AppLayout>
       <section className="page-header">
@@ -75,29 +70,33 @@ function Dashboard() {
           <p className="eyebrow">Dashboard</p>
           <h1 className="page-title">Ringkasan Inventaris</h1>
           <p className="page-description">
-            Pantau kondisi stok, supplier, dan rekomendasi pemesanan awal dalam
-            tampilan yang ringan dibaca.
+            Pantau total stok, stok kritis, dan rekomendasi pemesanan pending
+            dari data API terbaru.
           </p>
         </div>
-        <NeumorphicButton>
+        <NeumorphicButton onClick={() => navigate("/reports/inventory")}>
           Lihat Laporan
           <ArrowUpRight size={18} />
         </NeumorphicButton>
       </section>
 
+      {error ? <p className="form-error">{error}</p> : null}
+
       <section className="summary-grid" aria-label="Ringkasan inventaris">
-        {summaries.map((item) => {
+        {summaryConfig.map((item) => {
           const Icon = item.icon
 
           return (
-            <NeumorphicCard key={item.label} className="summary-card compact">
+            <NeumorphicCard key={item.key} className="summary-card compact">
               <div className="summary-top">
                 <p className="summary-label">{item.label}</p>
                 <div className="summary-icon">
                   <Icon size={21} />
                 </div>
               </div>
-              <p className="summary-value">{item.value}</p>
+              <p className="summary-value">
+                {loading ? "..." : formatNumber(summary[item.key])}
+              </p>
             </NeumorphicCard>
           )
         })}
@@ -109,63 +108,81 @@ function Dashboard() {
             <div>
               <h2 className="neo-card-title">Stok Kritis</h2>
               <p className="neo-card-muted">
-                Data dummy untuk fondasi tampilan tabel persediaan.
+                Inventory dengan stok saat ini di bawah atau sama dengan minimum stok.
               </p>
             </div>
           </div>
 
-          <div className="table-wrap">
-            <table className="stock-table">
-              <thead>
-                <tr>
-                  <th>Produk</th>
-                  <th>Kategori</th>
-                  <th>Stok</th>
-                  <th>ROP</th>
-                  <th>Supplier</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {criticalStocks.map((item) => (
-                  <tr key={item.product}>
-                    <td>{item.product}</td>
-                    <td>{item.category}</td>
-                    <td>{item.stock}</td>
-                    <td>{item.rop}</td>
-                    <td>{item.supplier}</td>
-                    <td>
-                      <StatusBadge status={item.status} />
-                    </td>
+          {loading ? (
+            <div className="empty-state">Memuat data...</div>
+          ) : criticalStocks.length === 0 ? (
+            <div className="empty-state">Tidak ada stok kritis.</div>
+          ) : (
+            <div className="table-wrap">
+              <table className="stock-table">
+                <thead>
+                  <tr>
+                    <th>Produk</th>
+                    <th>Kategori</th>
+                    <th>Supplier</th>
+                    <th>Hub</th>
+                    <th>Stok</th>
+                    <th>Minimum</th>
+                    <th>Status</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody>
+                  {criticalStocks.map((item) => (
+                    <tr key={item.id}>
+                      <td>{item.product?.name || "-"}</td>
+                      <td>{item.product?.category?.name || "-"}</td>
+                      <td>{item.product?.supplier?.name || "-"}</td>
+                      <td>{item.hub?.name || "-"}</td>
+                      <td>{formatNumber(item.current_stock)}</td>
+                      <td>{formatNumber(item.product?.minimum_stock)}</td>
+                      <td>
+                        <span className="status-badge status-critical">
+                          Kritis
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
         </NeumorphicCard>
 
         <NeumorphicCard>
-          <h2 className="neo-card-title">Rekomendasi Pemesanan</h2>
+          <h2 className="neo-card-title">Rekomendasi Pending</h2>
           <p className="neo-card-muted">
-            Prioritas pemesanan dummy berdasarkan stok saat ini dan nilai ROP.
+            Rekomendasi pemesanan yang masih menunggu verifikasi.
           </p>
 
-          <div className="recommendation-list">
-            {recommendations.map((item) => (
-              <article key={item.product} className="recommendation-item">
-                <h3>{item.product}</h3>
-                <p className="neo-card-muted">{item.note}</p>
-                <div className="recommendation-meta">
-                  <span className="meta-pill">Pesan {item.quantity}</span>
-                  {item.meta.map((meta) => (
-                    <span key={meta} className="meta-pill">
-                      {meta}
+          {loading ? (
+            <div className="empty-state">Memuat data...</div>
+          ) : recommendations.length === 0 ? (
+            <div className="empty-state">Tidak ada rekomendasi pending.</div>
+          ) : (
+            <div className="recommendation-list">
+              {recommendations.map((item) => (
+                <article key={item.id} className="recommendation-item">
+                  <h3>{item.product?.name || "-"}</h3>
+                  <p className="neo-card-muted">
+                    {item.hub?.name || "Tanpa hub"} - stok{" "}
+                    {formatNumber(item.current_stock)} / ROP{" "}
+                    {formatNumber(item.rop_value)}
+                  </p>
+                  <div className="recommendation-meta">
+                    <span className="meta-pill">
+                      Pesan {formatNumber(item.recommended_quantity)}
                     </span>
-                  ))}
-                </div>
-              </article>
-            ))}
-          </div>
+                    <span className="meta-pill">Pending</span>
+                  </div>
+                </article>
+              ))}
+            </div>
+          )}
         </NeumorphicCard>
       </section>
     </AppLayout>
