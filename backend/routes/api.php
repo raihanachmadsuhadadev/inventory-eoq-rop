@@ -3,8 +3,10 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\HubController;
+use App\Http\Controllers\Api\InventoryController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ShiftController;
+use App\Http\Controllers\Api\StockTransactionController;
 use App\Http\Controllers\Api\SupplierController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +31,10 @@ Route::middleware('auth:sanctum')->group(function (): void {
         Route::get('/suppliers/{supplier}', [SupplierController::class, 'show']);
         Route::get('/products', [ProductController::class, 'index']);
         Route::get('/products/{product}', [ProductController::class, 'show']);
+        Route::get('/inventories', [InventoryController::class, 'index']);
+        Route::get('/inventories/{inventory}', [InventoryController::class, 'show']);
+        Route::get('/stock-transactions', [StockTransactionController::class, 'index']);
+        Route::get('/stock-transactions/{stockTransaction}', [StockTransactionController::class, 'show']);
     });
 
     Route::middleware('role:super_admin')->group(function (): void {
@@ -50,5 +56,6 @@ Route::middleware('auth:sanctum')->group(function (): void {
         Route::post('/products', [ProductController::class, 'store']);
         Route::put('/products/{product}', [ProductController::class, 'update']);
         Route::delete('/products/{product}', [ProductController::class, 'destroy']);
+        Route::post('/stock-transactions', [StockTransactionController::class, 'store']);
     });
 });

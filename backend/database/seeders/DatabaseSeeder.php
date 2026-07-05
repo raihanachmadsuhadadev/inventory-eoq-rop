@@ -22,6 +22,8 @@ class DatabaseSeeder extends Seeder
             ShiftSeeder::class,
             SupplierSeeder::class,
             ProductSeeder::class,
+            InventorySeeder::class,
+            StockTransactionSeeder::class,
         ]);
     }
 }

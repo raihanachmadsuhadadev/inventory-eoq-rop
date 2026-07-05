@@ -4,9 +4,11 @@ import { useAuth } from "./context/AuthContext"
 import Categories from "./pages/Categories"
 import Dashboard from "./pages/Dashboard"
 import Hubs from "./pages/Hubs"
+import Inventories from "./pages/Inventories"
 import Login from "./pages/Login"
 import Products from "./pages/Products"
 import Shifts from "./pages/Shifts"
+import StockTransactions from "./pages/StockTransactions"
 import Suppliers from "./pages/Suppliers"
 
 function App() {
@@ -74,6 +76,22 @@ function App() {
         element={
           <ProtectedRoute>
             <Products />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/inventories"
+        element={
+          <ProtectedRoute>
+            <Inventories />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/stock-transactions"
+        element={
+          <ProtectedRoute>
+            <StockTransactions />
           </ProtectedRoute>
         }
       />

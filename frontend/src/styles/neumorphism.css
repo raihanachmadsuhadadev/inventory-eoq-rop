@@ -651,6 +651,10 @@ a {
   padding: 8px 12px;
 }
 
+.toolbar-select {
+  width: min(260px, 100%);
+}
+
 .empty-state {
   display: grid;
   min-height: 160px;
