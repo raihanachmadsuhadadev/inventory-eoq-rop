@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             StockTransactionSeeder::class,
             EoqCalculationSeeder::class,
             RopCalculationSeeder::class,
+            PurchaseRecommendationSeeder::class,
         ]);
     }
 }

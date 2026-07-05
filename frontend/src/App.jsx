@@ -8,6 +8,7 @@ import Hubs from "./pages/Hubs"
 import Inventories from "./pages/Inventories"
 import Login from "./pages/Login"
 import Products from "./pages/Products"
+import PurchaseRecommendations from "./pages/PurchaseRecommendations"
 import Rop from "./pages/Rop"
 import Shifts from "./pages/Shifts"
 import StockTransactions from "./pages/StockTransactions"
@@ -110,6 +111,14 @@ function App() {
         element={
           <ProtectedRoute>
             <Rop />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/purchase-recommendations"
+        element={
+          <ProtectedRoute>
+            <PurchaseRecommendations />
           </ProtectedRoute>
         }
       />

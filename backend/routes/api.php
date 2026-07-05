@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\EoqCalculationController;
 use App\Http\Controllers\Api\HubController;
 use App\Http\Controllers\Api\InventoryController;
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\PurchaseRecommendationController;
 use App\Http\Controllers\Api\RopCalculationController;
 use App\Http\Controllers\Api\ShiftController;
 use App\Http\Controllers\Api\StockTransactionController;
@@ -41,6 +42,8 @@ Route::middleware('auth:sanctum')->group(function (): void {
         Route::get('/eoq-calculations/{eoqCalculation}', [EoqCalculationController::class, 'show']);
         Route::get('/rop-calculations', [RopCalculationController::class, 'index']);
         Route::get('/rop-calculations/{ropCalculation}', [RopCalculationController::class, 'show']);
+        Route::get('/purchase-recommendations', [PurchaseRecommendationController::class, 'index']);
+        Route::get('/purchase-recommendations/{purchaseRecommendation}', [PurchaseRecommendationController::class, 'show']);
     });
 
     Route::middleware('role:super_admin')->group(function (): void {
@@ -65,5 +68,11 @@ Route::middleware('auth:sanctum')->group(function (): void {
         Route::post('/stock-transactions', [StockTransactionController::class, 'store']);
         Route::post('/eoq-calculations', [EoqCalculationController::class, 'store']);
         Route::post('/rop-calculations', [RopCalculationController::class, 'store']);
+        Route::post('/purchase-recommendations/generate', [PurchaseRecommendationController::class, 'generate']);
+    });
+
+    Route::middleware('role:super_admin,manager_gudang')->group(function (): void {
+        Route::put('/purchase-recommendations/{purchaseRecommendation}/approve', [PurchaseRecommendationController::class, 'approve']);
+        Route::put('/purchase-recommendations/{purchaseRecommendation}/reject', [PurchaseRecommendationController::class, 'reject']);
     });
 });

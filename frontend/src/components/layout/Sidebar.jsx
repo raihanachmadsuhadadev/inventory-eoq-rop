@@ -28,7 +28,7 @@ const menuItems = [
   { label: "Transaksi Stok", to: "/stock-transactions", icon: Repeat },
   { label: "EOQ", to: "/eoq", icon: BarChart3 },
   { label: "ROP", to: "/rop", icon: Gauge },
-  { label: "Rekomendasi", to: "#", icon: Lightbulb },
+  { label: "Rekomendasi", to: "/purchase-recommendations", icon: Lightbulb },
   { label: "Laporan", to: "#", icon: FileText },
 ]
 
