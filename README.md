@@ -189,7 +189,7 @@ inventory-eoq-rop/
 
 ## Screenshots
 
-Beberapa tampilan utama aplikasi ditampilkan di bawah ini. Screenshot lengkap tersedia di folder `docs/screenshots`.
+Berikut adalah beberapa tampilan utama dari aplikasi Inventory EOQ ROP.
 
 ### Login Page
 
@@ -199,9 +199,41 @@ Beberapa tampilan utama aplikasi ditampilkan di bawah ini. Screenshot lengkap te
 
 ![Dashboard](./docs/screenshots/02-dashboard.png)
 
+### Sidebar Super Admin
+
+![Sidebar Super Admin](./docs/screenshots/03-sidebar-super-admin.png)
+
+### Sidebar Admin Gudang
+
+![Sidebar Admin Gudang](./docs/screenshots/04-sidebar-admin-gudang.png)
+
+### Sidebar Manager Gudang
+
+![Sidebar Manager Gudang](./docs/screenshots/05-sidebar-manager-gudang.png)
+
 ### Product Management
 
 ![Product Management](./docs/screenshots/06-products-table.png)
+
+### Product Modal
+
+![Product Modal](./docs/screenshots/07-product-modal.png)
+
+### Product Detail
+
+![Product Detail](./docs/screenshots/08-product-detail.png)
+
+### Supplier Management
+
+![Supplier Management](./docs/screenshots/09-suppliers-table.png)
+
+### Inventory Table
+
+![Inventory Table](./docs/screenshots/10-inventories-table.png)
+
+### Stock Transactions
+
+![Stock Transactions](./docs/screenshots/11-stock-transactions.png)
 
 ### EOQ Calculation
 
@@ -215,30 +247,21 @@ Beberapa tampilan utama aplikasi ditampilkan di bawah ini. Screenshot lengkap te
 
 ![Purchase Recommendations](./docs/screenshots/14-purchase-recommendations.png)
 
----
+### Inventory Report
 
-### Screenshot Lengkap
+![Inventory Report](./docs/screenshots/15-inventory-report.png)
 
-| No | Tampilan | File |
-|---:|---|---|
-| 1 | Login Page | [01-login-page.png](./docs/screenshots/01-login-page.png) |
-| 2 | Dashboard | [02-dashboard.png](./docs/screenshots/02-dashboard.png) |
-| 3 | Sidebar Super Admin | [03-sidebar-super-admin.png](./docs/screenshots/03-sidebar-super-admin.png) |
-| 4 | Sidebar Admin Gudang | [04-sidebar-admin-gudang.png](./docs/screenshots/04-sidebar-admin-gudang.png) |
-| 5 | Sidebar Manager Gudang | [05-sidebar-manager-gudang.png](./docs/screenshots/05-sidebar-manager-gudang.png) |
-| 6 | Product Management | [06-products-table.png](./docs/screenshots/06-products-table.png) |
-| 7 | Product Modal | [07-product-modal.png](./docs/screenshots/07-product-modal.png) |
-| 8 | Product Detail | [08-product-detail.png](./docs/screenshots/08-product-detail.png) |
-| 9 | Supplier Management | [09-suppliers-table.png](./docs/screenshots/09-suppliers-table.png) |
-| 10 | Inventory Table | [10-inventories-table.png](./docs/screenshots/10-inventories-table.png) |
-| 11 | Stock Transactions | [11-stock-transactions.png](./docs/screenshots/11-stock-transactions.png) |
-| 12 | EOQ Calculation | [12-eoq-preview.png](./docs/screenshots/12-eoq-preview.png) |
-| 13 | ROP Calculation | [13-rop-preview.png](./docs/screenshots/13-rop-preview.png) |
-| 14 | Purchase Recommendations | [14-purchase-recommendations.png](./docs/screenshots/14-purchase-recommendations.png) |
-| 15 | Inventory Report | [15-inventory-report.png](./docs/screenshots/15-inventory-report.png) |
-| 16 | Import Excel Modal | [16-import-excel-modal.png](./docs/screenshots/16-import-excel-modal.png) |
-| 17 | Toast Notification | [17-toast-notification.png](./docs/screenshots/17-toast-notification.png) |
-| 18 | Confirm Delete | [18-confirm-delete.png](./docs/screenshots/18-confirm-delete.png) |
+### Import Excel Modal
+
+![Import Excel Modal](./docs/screenshots/16-import-excel-modal.png)
+
+### Toast Notification
+
+![Toast Notification](./docs/screenshots/17-toast-notification.png)
+
+### Confirm Delete
+
+![Confirm Delete](./docs/screenshots/18-confirm-delete.png)
 
 ## Persiapan Environment
 
