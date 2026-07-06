@@ -205,11 +205,11 @@ Beberapa tampilan utama aplikasi ditampilkan di bawah ini. Screenshot lengkap te
 
 ### EOQ Calculation
 
-![EOQ Calculation](./docs/screenshots/12-eoq-calculation.png)
+![EOQ Calculation](./docs/screenshots/12-eoq-preview.png)
 
 ### ROP Calculation
 
-![ROP Calculation](./docs/screenshots/13-rop-calculation.png)
+![ROP Calculation](./docs/screenshots/13-rop-preview.png)
 
 ### Purchase Recommendations
 
@@ -232,8 +232,8 @@ Beberapa tampilan utama aplikasi ditampilkan di bawah ini. Screenshot lengkap te
 | 9 | Supplier Management | [09-suppliers-table.png](./docs/screenshots/09-suppliers-table.png) |
 | 10 | Inventory Table | [10-inventories-table.png](./docs/screenshots/10-inventories-table.png) |
 | 11 | Stock Transactions | [11-stock-transactions.png](./docs/screenshots/11-stock-transactions.png) |
-| 12 | EOQ Calculation | [12-eoq-calculation.png](./docs/screenshots/12-eoq-calculation.png) |
-| 13 | ROP Calculation | [13-rop-calculation.png](./docs/screenshots/13-rop-calculation.png) |
+| 12 | EOQ Calculation | [12-eoq-preview.png](./docs/screenshots/12-eoq-preview.png) |
+| 13 | ROP Calculation | [13-rop-preview.png](./docs/screenshots/13-rop-preview.png) |
 | 14 | Purchase Recommendations | [14-purchase-recommendations.png](./docs/screenshots/14-purchase-recommendations.png) |
 | 15 | Inventory Report | [15-inventory-report.png](./docs/screenshots/15-inventory-report.png) |
 | 16 | Import Excel Modal | [16-import-excel-modal.png](./docs/screenshots/16-import-excel-modal.png) |
