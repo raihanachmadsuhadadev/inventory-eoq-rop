@@ -195,9 +195,9 @@ Berikut adalah beberapa tampilan utama dari aplikasi Inventory EOQ ROP.
 
 ![Login Page](./docs/screenshots/01-login-page.png)
 
-### Dashboard
+### Dashboard Overview
 
-![Dashboard](./docs/screenshots/02-dashboard.png)
+![Dashboard Overview](./docs/screenshots/02-dashboard-overview.png)
 
 ### Sidebar Super Admin
 
@@ -213,39 +213,39 @@ Berikut adalah beberapa tampilan utama dari aplikasi Inventory EOQ ROP.
 
 ### Product Management
 
-![Product Management](./docs/screenshots/06-products-table.png)
+![Product Management](./docs/screenshots/06-products-list.png)
 
-### Product Modal
+### Product Form Modal
 
-![Product Modal](./docs/screenshots/07-product-modal.png)
+![Product Form Modal](./docs/screenshots/07-product-form-modal.png)
 
-### Product Detail
+### Product Detail Page
 
-![Product Detail](./docs/screenshots/08-product-detail.png)
+![Product Detail Page](./docs/screenshots/08-product-detail-page.png)
 
 ### Supplier Management
 
-![Supplier Management](./docs/screenshots/09-suppliers-table.png)
+![Supplier Management](./docs/screenshots/09-suppliers-list.png)
 
-### Inventory Table
+### Inventory List
 
-![Inventory Table](./docs/screenshots/10-inventories-table.png)
+![Inventory List](./docs/screenshots/10-inventory-list.png)
 
 ### Stock Transactions
 
-![Stock Transactions](./docs/screenshots/11-stock-transactions.png)
+![Stock Transactions](./docs/screenshots/11-stock-transactions-list.png)
 
 ### EOQ Calculation
 
-![EOQ Calculation](./docs/screenshots/12-eoq-preview.png)
+![EOQ Calculation](./docs/screenshots/12-eoq-calculation-list.png)
 
 ### ROP Calculation
 
-![ROP Calculation](./docs/screenshots/13-rop-preview.png)
+![ROP Calculation](./docs/screenshots/13-rop-calculation-list.png)
 
 ### Purchase Recommendations
 
-![Purchase Recommendations](./docs/screenshots/14-purchase-recommendations.png)
+![Purchase Recommendations](./docs/screenshots/14-purchase-recommendations-list.png)
 
 ### Inventory Report
 
@@ -259,9 +259,9 @@ Berikut adalah beberapa tampilan utama dari aplikasi Inventory EOQ ROP.
 
 ![Toast Notification](./docs/screenshots/17-toast-notification.png)
 
-### Confirm Delete
+### Delete Confirmation Modal
 
-![Confirm Delete](./docs/screenshots/18-confirm-delete.png)
+![Delete Confirmation Modal](./docs/screenshots/18-delete-confirmation-modal.png)
 
 ## Persiapan Environment
 
